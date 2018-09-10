@@ -5,6 +5,7 @@
   <name>CC3220_DFP</name>
   <description>Texas Instruments CC3220 Series Device Support</description>
   <supportContact>support@mbed.com</supportContact>
+  <url>http://os.mbed.com</url>
 
   <releases>
     <release version="1.0.0" date="2018-09-10">
@@ -19,6 +20,12 @@
     <keyword>Device Family Package Texas Instruments</keyword>
     <keyword>CC3220</keyword>
   </keywords>
+
+  <requirements>
+    <packages>
+      <package vendor="ARM" name="CMSIS" version="5.0.0"/>
+    </packages>
+  </requirements>
 
   <devices>
     <family Dfamily="CC3220x Series" Dvendor="Texas Instruments:16">
@@ -39,42 +46,46 @@
     </family>
   </devices>
 
-  <!-- examples section (optional for all Software Packs)-->
-  <!--
-  <examples>
-  </examples>
-  -->
+  <conditions>
+    <condition id="CC3220x CMSIS-Core">
+      <!-- conditions selecting Devices -->
+      <description>Texas Instruments CC3220 Series devices and CMSIS-Core (Cortex-M)</description>
+      <require Cclass="CMSIS" Cgroup="Core"/>
+      <require Dvendor="Texas Instruments:16" Dname="CC3220*"/>
+    </condition>
+    <condition id="isCC3220SF">
+        <description>Texas Instruments CC3220SF device</description>
+        <require Cclass="CMSIS" Cgroup="CORE"/>
+        <require Dvendor="Texas Instruments:16" Dname="CC3220SF"/>
+    </condition>
+    <condition id="Startup ARM">
+      <description>Startup assembler file for ARMCC</description>
+      <require Tcompiler="ARMCC"/>
+    </condition>
+    <condition id="Startup GCC">
+      <description>Startup assembler file for GCC</description>
+      <require Tcompiler="GCC"/>
+    </condition>
+    <condition id="Startup IAR">
+      <description>Startup assembler file for IAR</description>
+      <require Tcompiler="IAR"/>
+    </condition>
+  </conditions>
 
-  <condition id="CC3220 CMSIS-Core">
-    <!-- conditions selecting Devices -->
-    <description>Texas Instruments CC3220 Series devices and CMSIS-Core (Cortex-M)</description>
-    <require Cclass="CMSIS" Cgroup="Core"/>
-    <require Dvendor="Texas Instruments:16" Dname="CC3220*"/>
-  </condition>
-  <condition id="Startup ARM">
-    <description>Startup assembler file for ARMCC</description>
-    <require Tcompiler="ARMCC"/>
-  </condition>
-  <condition id="Startup GCC">
-    <description>Startup assembler file for GCC</description>
-    <require Tcompiler="GCC"/>
-  </condition>
-  <condition id="Startup IAR">
-    <description>Startup assembler file for IAR</description>
-    <require Tcompiler="IAR"/>
-  </condition>
-
-  <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="CC3220x CMSIS-Core">
-    <description>System Startup for CC3220x Series</description>
-    <files>
-      <!--  include folder -->
-      <file category="include" name="Device/Include/"/>
-      <file category="source"  name="Device/Source/ARM/startup_CC3220SF.s" attr="config" condition="Startup ARM" version="1.0.0"/>
-      <file category="source"  name="Device/Source/GCC/startup_CC3220SF.S" attr="config" condition="Startup GCC" version="1.0.0"/>
-      <file category="source"  name="Device/Source/IAR/startup_CC3220SF.s" attr="config" condition="Startup IAR" version="1.0.0"/>
-      <file category="source"  name="Device/Source/system_CC3220SF.c"  attr="config" version="1.0.0"/>
-      <file category="source"  name="Device/Source/CC3220SF_LAUNCHXL.c"  attr="config" version="1.0.0"/>
-    </files>
-  </component>
+  <components>
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="isCC3220SF">
+      <description>System Startup for CC3220x Series</description>
+      <files>
+        <!--  include folder -->
+        <file category="include" name="Device/Include/"/>
+        <file category="source"  name="Device/Source/ARM/startup_CC3220SF.s" attr="config" condition="Startup ARM" version="1.0.0"/>
+        <file category="source"  name="Device/Source/GCC/startup_CC3220SF.S" attr="config" condition="Startup GCC" version="1.0.0"/>
+        <file category="source"  name="Device/Source/IAR/startup_CC3220SF.s" attr="config" condition="Startup IAR" version="1.0.0"/>
+        <file category="source"  name="Device/Source/system_CC3220SF.c"  attr="config" version="1.0.0"/>
+        <file category="source"  name="Device/Source/CC3220SF_LAUNCHXL.c"  attr="config" version="1.0.0"/>
+        <file category="include" name="Device/Source/ti/"/>
+      </files>
+    </component>
+  </components>
 
 </package>
