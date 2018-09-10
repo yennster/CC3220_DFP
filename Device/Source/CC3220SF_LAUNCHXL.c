@@ -40,26 +40,26 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include <../inc/hw_ints.h>
-#include <../inc/hw_memmap.h>
-#include <../inc/hw_types.h>
+#include <ti/devices/cc32xx/inc/hw_ints.h>
+#include <ti/devices/cc32xx/inc/hw_memmap.h>
+#include <ti/devices/cc32xx/inc/hw_types.h>
 
-#include <../driverlib/rom.h>
-#include <../driverlib/rom_map.h>
-#include <../driverlib/adc.h>
-#include <../driverlib/gpio.h>
-#include <../driverlib/pin.h>
-#include <../driverlib/prcm.h>
-#include <../driverlib/ti_spi_driverlib.h>
-#include <../driverlib/sdhost.h>
-#include <../driverlib/ti_timer.h>
-#include <../driverlib/uart.h>
-#include <../driverlib/udma.h>
-#include <../driverlib/interrupt.h>
-#include <../driverlib/wdt.h>
+#include <ti/devices/cc32xx/driverlib/rom.h>
+#include <ti/devices/cc32xx/driverlib/rom_map.h>
+#include <ti/devices/cc32xx/driverlib/adc.h>
+#include <ti/devices/cc32xx/driverlib/gpio.h>
+#include <ti/devices/cc32xx/driverlib/pin.h>
+#include <ti/devices/cc32xx/driverlib/prcm.h>
+#include <ti/devices/cc32xx/driverlib/ti_spi_driverlib.h>
+#include <ti/devices/cc32xx/driverlib/sdhost.h>
+#include <ti/devices/cc32xx/driverlib/ti_timer.h>
+#include <ti/devices/cc32xx/driverlib/uart.h>
+#include <ti/devices/cc32xx/driverlib/udma.h>
+#include <ti/devices/cc32xx/driverlib/interrupt.h>
+#include <ti/devices/cc32xx/driverlib/wdt.h>
 
-#include <../ti/drivers/Power.h>
-#include <../ti/drivers/power/PowerCC32XX.h>
+#include <ti/drivers/Power.h>
+#include <ti/drivers/power/PowerCC32XX.h>
 
 #include "CC3220SF_LAUNCHXL.h"
 

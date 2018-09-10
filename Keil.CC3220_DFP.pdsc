@@ -49,9 +49,9 @@
 
   <condition id="CC3220 CMSIS-Core">
     <!-- conditions selecting Devices -->
-    <description>MyVendor MVCM3 Series devices and CMSIS-Core (Cortex-M)</description>
+    <description>Texas Instruments CC3220 Series devices and CMSIS-Core (Cortex-M)</description>
     <require Cclass="CMSIS" Cgroup="Core"/>
-    <require Dvendor="Generic:5" Dname="MVCM3*"/>
+    <require Dvendor="Texas Instruments:16" Dname="CC3220*"/>
   </condition>
   <condition id="Startup ARM">
     <description>Startup assembler file for ARMCC</description>
@@ -66,10 +66,17 @@
     <require Tcompiler="IAR"/>
   </condition>
 
-  <!-- component section (optional for all Software Packs)-->
-  <!--
-  <components>
-  </components>
-  -->
+  <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="CC3220x CMSIS-Core">
+    <description>System Startup for CC3220x Series</description>
+    <files>
+      <!--  include folder -->
+      <file category="include" name="Device/Include/"/>
+      <file category="source"  name="Device/Source/ARM/startup_CC3220SF.s" attr="config" condition="Startup ARM" version="1.0.0"/>
+      <file category="source"  name="Device/Source/GCC/startup_CC3220SF.S" attr="config" condition="Startup GCC" version="1.0.0"/>
+      <file category="source"  name="Device/Source/IAR/startup_CC3220SF.s" attr="config" condition="Startup IAR" version="1.0.0"/>
+      <file category="source"  name="Device/Source/system_CC3220SF.c"  attr="config" version="1.0.0"/>
+      <file category="source"  name="Device/Source/CC3220SF_LAUNCHXL.c"  attr="config" version="1.0.0"/>
+    </files>
+  </component>
 
 </package>
