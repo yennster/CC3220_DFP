@@ -8,7 +8,7 @@
   <supportContact>support@mbed.com</supportContact>
 
   <releases>
-    <release version="1.0.0">
+    <release version="1.0.0" date="2018-09-10">
       First release version of the TI CC3220 Device Family Pack.
     </release>
   </releases>
@@ -22,22 +22,22 @@
   </keywords>
 
   <devices>
-    <family Dfamily="CC3220 Series" Dvendor="Texas Instruments:16">
+    <family Dfamily="CC3220x Series" Dvendor="Texas Instruments:16">
       <processor Dcore="Cortex-M4" DcoreVersion="r0p1"/>
       <book name="Documents/dui0553a_cortex_m4_dgug.pdf" title="Cortex-M4 Generic User Guide"/>
       <description>
-        The CC3220x device is part of the SimpleLink™ microcontroller (MCU) platform which consists of Wi-Fi, low energy, Sub-1 GHz and host MCUs, which all share a common, easy-to-use development environment with a single core software development kit (SDK) and rich tool set.
+        The CC3220 device is part of the SimpleLink™ microcontroller (MCU) platform which consists of Wi-Fi, low energy, Sub-1 GHz and host MCUs, which all share a common, easy-to-use development environment with a single core software development kit (SDK) and rich tool set.
       </description>
-      <!-- ************************  Sub-family 'CC3220x'  **************************** -->
-      <subFamily DsubFamily="CC3220x">
-        <processor  Dclock="50000000"/>
-        <!-- *************************  Device 'CC3220SF'  ***************************** -->
-        <device Dname="CC3220SF">
-          <compile header="Device\Include\CC3220SF.h" define="CC3220SF"/>
-          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x4000"     startup="1"   default="1"/>
-          <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x0800"     init   ="0"   default="1"/>
-        </device>
-      </subFamily>
+      <!-- *************************  Device 'CC3220SF'  ***************************** -->
+      <device Dname="CC3220SF">
+        <processor Dfpu="1" Dmpu="1" Dendian="Little-endian" Dclock="80000000"/>
+        <compile header="Device/Include/CC3220SF.h" define="CC3220SF"/>
+        <debug      svd="SVD/CC3220SF.svd"/>
+        <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x4000"     startup="1"   default="1"/>
+        <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x0800"     init   ="0"   default="1"/>
+
+        <book name="http://www.ti.com/general/docs/lit/getliterature.tsp?genericPartNumber=CC3220&amp;fileType=pdf" title="CC3220x Datasheet"/>
+      </device>
     </family>
   </devices>
 
