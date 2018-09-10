@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <package schemaVersion="1.4" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
-  <vendor>Keil</vendor>
-  <url>http://www.keil.com/pack/</url>
+  <vendor>Texas Instruments</vendor>
   <name>CC3220_DFP</name>
   <description>Texas Instruments CC3220 Series Device Support</description>
   <supportContact>support@mbed.com</supportContact>
@@ -24,7 +23,6 @@
   <devices>
     <family Dfamily="CC3220x Series" Dvendor="Texas Instruments:16">
       <processor Dcore="Cortex-M4" DcoreVersion="r0p1"/>
-      <book name="Documents/dui0553a_cortex_m4_dgug.pdf" title="Cortex-M4 Generic User Guide"/>
       <description>
         The CC3220 device is part of the SimpleLink™ microcontroller (MCU) platform which consists of Wi-Fi, low energy, Sub-1 GHz and host MCUs, which all share a common, easy-to-use development environment with a single core software development kit (SDK) and rich tool set.
       </description>
