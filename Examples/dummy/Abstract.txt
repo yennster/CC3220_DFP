@@ -1,0 +1,2 @@
+This is an abstract file that can give further information on the project,
+required hardware, and other pre-requisites.

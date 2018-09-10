@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package schemaVersion="1.4" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <vendor>Keil</vendor>
+  <url>http://www.keil.com/pack/</url>
+  <name>CC3220_DFP</name>
+  <description>Texas Instruments CC3220 Series Device Support</description>
+  <supportContact>support@mbed.com</supportContact>
+
+  <releases>
+    <release version="1.0.0">
+      First release version of the TI CC3220 Device Family Pack.
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>Texas Instruments</keyword>
+    <keyword>Device Support</keyword>
+    <keyword>Device Family Package Texas Instruments</keyword>
+    <keyword>CC3220</keyword>
+  </keywords>
+
+  <devices>
+    <family Dfamily="CC3220 Series" Dvendor="Texas Instruments:16">
+      <processor Dcore="Cortex-M4" DcoreVersion="r0p1"/>
+      <book name="Documents/dui0553a_cortex_m4_dgug.pdf" title="Cortex-M4 Generic User Guide"/>
+      <description>
+        The CC3220x device is part of the SimpleLink™ microcontroller (MCU) platform which consists of Wi-Fi, low energy, Sub-1 GHz and host MCUs, which all share a common, easy-to-use development environment with a single core software development kit (SDK) and rich tool set.
+      </description>
+      <!-- ************************  Sub-family 'CC3220x'  **************************** -->
+      <subFamily DsubFamily="CC3220x">
+        <processor  Dclock="50000000"/>
+        <!-- *************************  Device 'CC3220SF'  ***************************** -->
+        <device Dname="CC3220SF">
+          <compile header="Device\Include\CC3220SF.h" define="CC3220SF"/>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x4000"     startup="1"   default="1"/>
+          <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x0800"     init   ="0"   default="1"/>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+
+  <!-- examples section (optional for all Software Packs)-->
+  <!--
+  <examples>
+  </examples>
+  -->
+
+  <condition id="CC3220 CMSIS-Core">
+    <!-- conditions selecting Devices -->
+    <description>MyVendor MVCM3 Series devices and CMSIS-Core (Cortex-M)</description>
+    <require Cclass="CMSIS" Cgroup="Core"/>
+    <require Dvendor="Generic:5" Dname="MVCM3*"/>
+  </condition>
+  <condition id="Startup ARM">
+    <description>Startup assembler file for ARMCC</description>
+    <require Tcompiler="ARMCC"/>
+  </condition>
+  <condition id="Startup GCC">
+    <description>Startup assembler file for GCC</description>
+    <require Tcompiler="GCC"/>
+  </condition>
+  <condition id="Startup IAR">
+    <description>Startup assembler file for IAR</description>
+    <require Tcompiler="IAR"/>
+  </condition>
+
+  <!-- component section (optional for all Software Packs)-->
+  <!--
+  <components>
+  </components>
+  -->
+
+</package>

@@ -1,0 +1,235 @@
+<!-- -------------------- Below you will find the code for 01_Basic_Pack -------------------- -->
+  <!-- Add the following code to the <devices> section in the PDSC file -->
+
+  <devices>
+    <family Dfamily="MVCM3 Series" Dvendor="Generic:5">
+      <processor Dcore="Cortex-M3" DcoreVersion="r2p1" Dfpu="0" Dmpu="0" Dendian="Little-endian"/>
+      <description>
+        The MVCM3 device family contains an ARM Cortex-M3 processor, running up to 100 MHz with a versatile set of on-chip peripherals.
+      </description>
+      <!-- ************************  Subfamily 'MVCM3100'  **************************** -->
+      <subFamily DsubFamily="MVCM3100">
+        <processor  Dclock="50000000"/>
+        <!-- *************************  Device 'MVCM3110'  ***************************** -->
+        <device Dname="MVCM3110">
+          <memory     id="IROM1"                      start="0x00000000"  size="0x4000"     startup="1"   default="1"/>
+          <memory     id="IRAM1"                      start="0x20000000"  size="0x0800"     init   ="0"   default="1"/>
+        </device>
+        <!-- *************************  Device 'MVCM3120'  ***************************** -->
+        <device Dname="MVCM3120">
+          <memory     id="IROM1"                      start="0x00000000"  size="0x8000"     startup="1"   default="1"/>
+          <memory     id="IRAM1"                      start="0x20000000"  size="0x1000"     init   ="0"   default="1"/>
+        </device>
+      </subFamily>
+      <!-- ************************  Subfamily 'MVCM3200'  **************************** -->
+      <subFamily DsubFamily="MVCM3200">
+        <processor  Dclock="100000000"/>
+        <!-- *************************  Device 'MVCM3250'  ***************************** -->
+        <device Dname="MVCM3250">
+          <memory     id="IROM1"                      start="0x00000000"  size="0x4000"     startup="1"   default="1"/>
+          <memory     id="IRAM1"                      start="0x20000000"  size="0x0800"     init   ="0"   default="1"/>
+        </device>
+        <!-- *************************  Device 'MVCM3260'  ***************************** -->
+        <device Dname="MVCM3260">
+          <memory     id="IROM1"                      start="0x00000000"  size="0x8000"     startup="1"   default="1"/>
+          <memory     id="IRAM1"                      start="0x20000000"  size="0x1000"     init   ="0"   default="1"/>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+
+
+<!-- -------------------- Below you will find the code for 02_System_and_Startup -------------------- -->
+  <!-- Add the following code to the <conditions> section in the PDSC file -->
+
+  <conditions>
+    <condition id="MVCM3 CMSIS-CORE">
+      <!-- conditions selecting Devices -->
+      <description>MyVendor MVCM3 Series devices and CMSIS-CORE</description>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+      <require Dvendor="Generic:5" Dname="MVCM3*"/>
+    </condition>
+    <condition id="Startup ARM">
+      <description>Startup assembler file for ARMCC</description>
+      <require Tcompiler="ARMCC"/>
+    </condition>
+    <condition id="Startup GCC">
+      <description>Startup assembler file for GCC</description>
+      <require Tcompiler="GCC"/>
+    </condition>
+    <condition id="Startup IAR">
+      <description>Startup assembler file for IAR</description>
+      <require Tcompiler="IAR"/>
+    </condition>
+  </conditions>
+  
+  <!-- Add the following code to the <components> section in the PDSC file -->
+
+  <components>
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="MVCM3 CMSIS-CORE">
+      <description>System Startup for MyVendor MVCM3 Series</description>
+      <files>
+       <!--  include folder -->
+       <file category="include" name="Device/Include/"/>
+
+        <file category="source"  name="Device/Source/ARM/startup_MVCM3xxx.s" attr="config" condition="Startup ARM" version="1.0.0"/>
+        <file category="source"  name="Device/Source/GCC/startup_MVCM3xxx.S" attr="config" condition="Startup GCC" version="1.0.0"/>
+        <file category="source"  name="Device/Source/IAR/startup_MVCM3xxx.s" attr="config" condition="Startup IAR" version="1.0.0"/>
+
+        <file category="source"  name="Device/Source/system_MVCM3xxx.c"  attr="config" version="1.0.0"/>
+      </files>
+    </component>
+  </components>
+
+  <!-- Add the following code to the <releases> section in the PDSC file -->
+  
+    <release version="1.0.1">
+      Startup files included
+    </release>
+
+<!-- -------------------- Below you will find the code for 03_SVD_File -------------------- -->
+  <!-- Add the following code to the MVCM3xxx.svd file -->
+
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd" >
+  <vendor>MyVendor</vendor>              <!-- device vendor name -->
+  <vendorID>Generic</vendorID>           <!-- device vendor short name -->
+  <name>MVCM3xxx</name>                  <!-- name of part-->
+  <series>MVCM3xxx</series>              <!-- device series the device belongs to -->
+  <version>1.2</version>                 <!-- version of this description, adding CMSIS-SVD 1.1 tags -->
+  <description>ARM 32-bit Cortex-M3 Microcontroller based device, CPU clock up to 100 MHz.</description>
+
+  <!-- Add the following code to the <family> section in the PDSC file -->
+  
+	  <compile    header="Device/Include/MVCM3xxx.h"/>
+      <debug      svd="SVD/MVCM3xxx.svd"/>
+
+  <!-- Add the following code to the <releases> section in the PDSC file -->
+  
+    <release version="1.0.2">
+      SVD and header file included
+    </release>
+
+<!-- -------------------- Below you will find the code for 04_Flash_Programming -------------------- -->
+  <!-- Add the following code to the FlashDev.c file -->
+
+struct FlashDevice const FlashDevice  =  {
+   FLASH_DRV_VERS,             // Driver Version, do not modify!
+   "MVCM3110/250 Flash",       // Device Name 
+   ONCHIP,                     // Device Type
+   0x00000000,                 // Device Start Address
+   0x00004000,                 // Device Size in Bytes (16kB)
+   1024,                       // Programming Page Size
+   0,                          // Reserved, must be 0
+   0xFF,                       // Initial Content of Erased Memory
+   100,                        // Program Page Timeout 100 mSec
+   3000,                       // Erase Sector Timeout 3000 mSec
+
+// Specify Size and Address of Sectors
+   0x002000, 0x000000,         // Sector Size  8kB (2 Sectors)
+   SECTOR_END
+};
+
+  <!-- Add the following code to the <device> section of MVCM3110/250 device in the PDSC file -->
+  
+		  <algorithm name="Flash/MVCM3XXX_16.FLM" start="0x00000000" size="0x4000" default="1"/>
+
+  <!-- Add the following code to the <device> section of MVCM3120/260 device in the PDSC file -->
+  
+		  <algorithm name="Flash/MVCM3XXX_32.FLM" start="0x00000000" size="0x8000" default="1"/>
+
+  <!-- Add the following code to the <releases> section in the PDSC file -->
+  
+    <release version="1.0.3">
+      Flash Programming Algorithms added
+    </release>
+
+<!-- -------------------- Below you will find the code for 05_Device_Properties -------------------- -->
+  <!-- Add the following code to the <family> section -->
+
+      <book      name="Docs/dui0552a_cortex_m3_dgug.pdf"   title="Cortex-M3 Generic User Guide"/>
+      <book      name="Docs/MVCM3XXX_Datasheet.pdf"        title="MVCM3 Series Datasheet"/>
+      <book      name="Docs/MVCM3XXX_Product_Brief.pdf"    title="MVCM3 Product Brief"/>
+      <feature type="ExtInt"        n="16"/>
+      <feature type="Temp"          n="-40"     m="105"   name="Extended Temperature Range"/>
+      <feature type="VCC"           n="2.5"     m="3.6"/>
+      <feature type="RTC"           n="32768"/>
+      <feature type="WDT"           n="1"/>
+
+  <!-- Add the following code to the MVCM31XX <subFamily> section -->
+
+        <feature type="IOs"           n="26"/>
+        <feature type="I2C"           n="1"/>
+        <feature type="UART"          n="4"/>
+        <feature type="Timer"         n="6"       m="32"/>
+		<feature type="QFP"           n="32"/>
+
+  <!-- Add the following code to the <device> section of MVCM3110 -->
+
+          <feature    type="PWM"           n="2" m="16"/>
+
+  <!-- Add the following code to the <components> section -->
+		  
+    <component Cclass="Device" Cgroup="HAL" Csub="GPIO" Cversion="1.0.0" condition="MVCM3 CMSIS-CORE">
+      <description>GPIO HAL for MyVendor MVCM3 Series</description>
+      <files>
+        <file category="header" name="Device/Include/GPIO.h"/>
+        <file category="source" name="Device/Source/GPIO.c"/>
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="HAL" Csub="ADC" Cversion="1.0.0" condition="MVCM3 CMSIS-CORE">
+      <description>ADC HAL for MyVendor MVCM3 Series</description>
+      <files>
+        <file category="header" name="Device/Include/ADC.h"/>
+        <file category="source" name="Device/Source/ADC.c"/>
+      </files>
+    </component>
+
+    <component Cclass="Drivers" Cgroup="I2C" Cversion="1.0.0" condition="MVCM3 CMSIS-CORE" maxInstances="3">
+      <description>I2C Driver for MVCM3 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_I2C0                /* Driver I2C0 */
+        #define RTE_Drivers_I2C1                /* Driver I2C1 */
+        #define RTE_Drivers_I2C2                /* Driver I2C2 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="Drivers/I2C/I2C_MVCM3.c"/>
+        <file category="header" name="Drivers/I2C/I2C_MVCM3.h"/>
+      </files>
+    </component>
+
+    <component Cclass="Drivers" Cgroup="UART" Cversion="1.0.0" condition="MVCM3 CMSIS-CORE" maxInstances="5">
+      <description>UART Driver for MVCM3 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_UART0               /* Driver UART0 */
+        #define RTE_Drivers_UART1               /* Driver UART1 */
+        #define RTE_Drivers_UART2               /* Driver UART2 */
+        #define RTE_Drivers_UART3               /* Driver UART3 */
+        #define RTE_Drivers_UART4               /* Driver UART4 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="Drivers/UART/UART_MVCM3.c"/>
+        <file category="header" name="Drivers/UART/UART_MVCM3.h"/>
+      </files>
+    </component>
+
+  <!-- Add the following code to the <examples> section -->
+		  
+  <examples>
+    <example name="Dummy" doc="Abstract.txt" folder="Examples/dummy">
+      <description>Dummy project</description>
+      <board name="MVCM3 Starter Kit" vendor="MyVendor"/>
+      <project>
+        <environment name="uv" load="dummy.uvprojx"/>
+      </project>
+      <attributes>
+        <category>Getting Started</category>
+      </attributes>
+    </example>
+  </examples>
+
+  <!-- Add the following code to the <releases> section in the PDSC file -->
+  
+    <release version="1.0.4">
+      DFP finalized
+    </release>
